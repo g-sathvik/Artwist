@@ -1,0 +1,62 @@
+@media screen and (min-width: 568px) {
+    .cards-wrapper{
+        display: flex;
+        margin: 100px;
+    }
+    .cardy{
+        margin: 0.5em;
+        width: calc(100%/3)
+    }
+    
+    .image-wrapper{
+        height: 22vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .image-wrapper img{
+        max-width: 100%;
+        max-height: 100%;
+    }
+}
+
+/* Add Responsiveness of cards */
+
+.header {
+    background-image:linear-gradient(to right, purple, white, purple);
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10vh;
+    box-shadow: 5px 5px 10px rgb(0,0,0,0.3);
+}
+.form_class {
+    width: 500px;
+    padding: 40px;
+    border-radius: 8px;
+    background-color: white;
+    font-family: 'system-ui';
+    box-shadow: 5px 5px 10px rgb(0,0,0,0.3);
+}
+
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    width: 100%;
+    background: url(https://previews.123rf.com/images/anthonycz/anthonycz1211/anthonycz121100020/16246442-drawings-on-blackboard.jpg) no-repeat center center;
+    background-size: cover;
+}
+
+.profile_img{
+    height: 150px;
+    width: 150px;
+    border: 2px solid black;
+    border-radius: 50%;
+    display: block;
+    margin: auto;
+}

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./resources/logo.jpg" type="image/x-icon" />
+    <title>Artwist- Room No. <%= room_code %></title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Sofia&effect=neon|outline|emboss|shadow-multiple"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./resources/game_styles.css" />
+  </head>
+  <body>
+    <div class="header">
+      <h1 style="text-align: center; font-family: cursive">
+        Your room no is <%= room_code %> Enjoy!!
+      </h1>
+    </div>
+    <div id="lobby">
+      <div class="col-9 col-s-9">
+        <div
+          class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5"
+          id="players"
+        ></div>
+        <% if(starter==='true'){ %>
+        <div id="buttons">
+          <button class="btn btn-success" onclick="start_game()" id="startgame">
+            Start Game
+          </button>
+        </div>
+        <% } %>
+        <div id="home"></div>
+      </div>
+      <div class="col-3 col-s-3" id="final_scores"></div>
+    </div>
+    <div id="game" style="display: none">
+      <div class="time_count">
+        <div
+          style="
+            text-align: center;
+            background-color: rgb(235, 190, 108);
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            border-bottom: 2px solid black;
+          "
+        >
+          Time Remaining
+        </div>
+        <div id="timer" style="text-align: center">150</div>
+      </div>
+      <div class="choose_box">
+        <div
+          style="
+            text-align: center;
+            background-color: rgb(235, 190, 108);
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            border-bottom: 2px solid black;
+          "
+        >
+          Choose from Here
+        </div>
+        <div id="choose" style="text-align: center">It's not your turn</div>
+      </div>
+      <!-- Change width and height of canvas for working of canvas.. ask saketh https://stackoverflow.com/questions/33191909/can-i-specify-canvas-dimensions-using-vh-and-vw -->
+      <div id="drawarea">
+        <div class="row">
+          <div class="col-2 col-s-2 background_leaderboard">
+            <h3 style="text-align: center; height: 4vh">Leaderboard</h3>
+            <div id="game_players" class="list-group">
+              <ul id="leaderboard"></ul>
+            </div>
+          </div>
+          <div class="col-6 col-s-6">
+            <canvas
+              id="myCanvas"
+              width="800px"
+              style="border: 8px solid #000000"
+            ></canvas>
+            <div id="drawing_tools"></div>
+          </div>
+          <div class="col-4 col-s-4">
+            <div id="chat_box">
+              <div
+                style="
+                  text-align: center;
+                  background-color: rgb(110, 173, 200);
+                  border-top-left-radius: 10px;
+                  border-top-right-radius: 10px;
+                  border-bottom: 2px solid black;
+                  font-size: 25px;
+                  font-weight: bolder;
+                  font-family: cursive;
+                "
+              >
+                Chat Box
+              </div>
+              <div>
+                <div id="id"></div>
+                <div id="chat_window"></div>
+              </div>
+            </div>
+            <div id="guess_input"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.socket.io/4.5.3/socket.io.min.js"
+    integrity="sha384-WPFUvHkB1aHA5TDSZi6xtDgkF0wXJcIIxXhC6h8OT8EH3fC5PWro5pWJ1THjcfEi"
+    crossorigin="anonymous"
+  ></script>
+  <script>
+    const socket = io();
+    let room_code = "<%-room_code%>";
+    let user = "<%-user%>";
+    socket.emit("room_code", { room_code: room_code, user: user });
+  </script>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-app.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+    https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-firestore.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyCvvpxdf0EEEz4hWng409wFpH9mAL5Sw-g",
+      authDomain: "artwister-c0c8e.firebaseapp.com",
+      projectId: "artwister-c0c8e",
+      storageBucket: "artwister-c0c8e.appspot.com",
+      messagingSenderId: "468334760517",
+      appId: "1:468334760517:web:248ac98c2a2198a4a2092c",
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+  </script>
+  <script src="./game.js"></script>
+</html>

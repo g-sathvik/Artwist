@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up- Artwist</title>
+  <link rel="stylesheet" href="./loginStyles.css" />
+  <link rel="shortcut icon" href="../logo.jpg" type="image/x-icon" />
+</head>
+
+<body>
+  <header>
+    <h1>Portal for SignUp</h1>
+  </header>
+  <main>
+    <div class="form_class">
+      <div class="form_div">
+        <form id="signup">
+          <label>username:</label>
+          <input class="field_class" name="user_txt" type="text" id="username" placeholder="Enter username" />
+          <label>Password:</label>
+          <input id="pass" class="field_class" name="password_txt" type="password" id="password"
+            placeholder="Password" />
+          <label>Confirm Password:</label>
+          <input id="con_pass" class="field_class" name="password_txt1" type="password"
+            placeholder="Confirm Password" />
+          <button class="submit_class" id="signUp" type="submit">
+            Sign Up
+          </button>
+        </form>
+      </div>
+      <div class="info_div">
+        <p>
+          Already registered?
+        <form action="/login">
+          <button class="submit_class">Login Now</button>
+        </form>
+        </p>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <p>Artwist welcomes you</p>
+  </footer>
+</body>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+    https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-firestore.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCvvpxdf0EEEz4hWng409wFpH9mAL5Sw-g",
+    authDomain: "artwister-c0c8e.firebaseapp.com",
+    projectId: "artwister-c0c8e",
+    storageBucket: "artwister-c0c8e.appspot.com",
+    messagingSenderId: "468334760517",
+    appId: "1:468334760517:web:248ac98c2a2198a4a2092c",
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+</script>
+<script src="./signUp.js"></script>
+
+</html>

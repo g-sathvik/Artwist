@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./resources/logo.jpg" type="image/x-icon" />
+    <title>Artwist- Room No. 7694</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./resources/game_styles.css" />
+  </head>
+  <body>
+    <div class="header">
+      <button class="profile-btn">
+        P
+        <img src="./resources/img_avatar.png" alt="Avatar" id="profile-img" />
+      </button>
+      <h1
+        style="
+          text-align: center;
+          font-family: cursive;
+          background-color: 2px solid black;
+        "
+      >
+        Your room no is 7694 Enjoy!!
+      </h1>
+      <button class="btn btn-danger logout-btn">LogOut/Exit</button>
+    </div>
+    <div id="lobby">
+      <div
+        class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5"
+        id="players"
+      ></div>
+      <div class="col-3" id="final_scores"></div>
+
+      <button onclick="start_game()" id="startgame">Start Game</button>
+    </div>
+    <div id="game" style="display: none">
+      <div class="time_count">
+        <div
+          style="
+            text-align: center;
+            background-color: rgb(235, 190, 108);
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            border-bottom: 2px solid black;
+          "
+        >
+          Time Remaining
+        </div>
+        <div id="timer" style="text-align: center">30</div>
+      </div>
+      <div class="choose_box">
+        <div
+          style="
+            text-align: center;
+            background-color: rgb(235, 190, 108);
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            border-bottom: 2px solid black;
+          "
+        >
+          Artist now
+        </div>
+        <div id="choose" style="text-align: center">Saketh is drawing..</div>
+      </div>
+      <!-- Change width and height of canvas for working of canvas.. ask saketh https://stackoverflow.com/questions/33191909/can-i-specify-canvas-dimensions-using-vh-and-vw -->
+      <div id="drawarea">
+        <div class="row">
+          <div class="col-2 col-s-2">
+            <div id="game_players"></div>
+          </div>
+          <div class="col-4 col-s-6">
+            <canvas
+              id="myCanvas"
+              height="500px"
+              width="1000px"
+              style="border: 8px solid #000000"
+            ></canvas>
+            <div id="drawing_tools">
+              <button
+                style="
+                  font-size: 100px;
+                  border-color: white;
+                  background-color: white;
+                  box-shadow: 0 0 white;
+                "
+                onclick="change_width(5)"
+              >
+                .
+              </button>
+              <button
+                style="
+                  font-size: 700px;
+                  border-color: white;
+                  background-color: white;
+                  box-shadow: 0 0 white;
+                "
+                onclick="change_width(11)"
+              >
+                .
+              </button>
+              <button
+                style="
+                  font-size: 1000px;
+                  border-color: white;
+                  background-color: white;
+                  box-shadow: 0 0 white;
+                "
+                onclick="change_width(20)"
+              >
+                .
+              </button>
+            </div>
+          </div>
+          <div id="chat_box" class="col-4 col-s-4">
+            <div
+              style="
+                text-align: center;
+                background-color: rgb(110, 173, 200);
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+                border-bottom: 2px solid black;
+                font-size: 25px;
+                font-weight: bolder;
+                font-family: cursive;
+              "
+            >
+              Chat Box
+            </div>
+            <!-- <div class="col">
+            <ul class="list-group" id="players"></ul>
+          </div> -->
+            <div
+              style="
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+              "
+            >
+              <div id="id">A</div>
+              <div id="guess" class="left">B</div>
+              <div id="guess" class="right">B</div>
+              <div id="guess_input">C</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.socket.io/4.5.3/socket.io.min.js"
+    integrity="sha384-WPFUvHkB1aHA5TDSZi6xtDgkF0wXJcIIxXhC6h8OT8EH3fC5PWro5pWJ1THjcfEi"
+    crossorigin="anonymous"
+  ></script>
+  <script>
+    const socket = io();
+    let room_code = "7694";
+    socket.emit("room_code", room_code);
+  </script>
+  <script src="./game.js"></script>
+</html>

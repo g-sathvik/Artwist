@@ -1,0 +1,30 @@
+{
+  "name": "theen-titans",
+  "version": "1.0.0",
+  "description": "Strive to Code",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KusalG05/Theen-Titans.git"
+  },
+  "author": "saketh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KusalG05/Theen-Titans/issues"
+  },
+  "homepage": "https://github.com/KusalG05/Theen-Titans#readme",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "casperjs": "^1.1.4",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "firebase": "^9.14.0",
+    "http": "^0.0.1-security",
+    "mongoose": "^6.7.0",
+    "puppeteer": "^19.3.0",
+    "socket.io": "^4.5.3"
+  }
+}

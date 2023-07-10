@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./logo.jpg" type="image/x-icon" />
+    <title>Artwist- Guess the Art</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Sofia&effect=neon|outline|emboss|shadow-multiple"
+    />
+    <style>
+      .title {
+        font-family: "Sofia", sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="" id="trail">
+      <div class="header">
+        <form action="/account?user=<%= user %>" method="post">
+          <button type="submit" class="profile"></button>
+        </form>
+        <h1 class="title">Drawizer</h1>
+        <form action="/login">
+          <button type="submit" class="btn btn-primary">Logout</button>
+        </form>
+      </div>
+      <div id="intro">
+        <p
+          style="
+            display: inline;
+            border: 2px solid black;
+            border-radius: 30px;
+            font-size: 3vh;
+            font-family: 'Sofia', sans-serif;
+            background-color: aliceblue;
+            padding: 0.6vh;
+          "
+          class="font-effect-shadow-multiple"
+        >
+          Welcome back <%= user %>
+        </p>
+      </div>
+      <div class="col-s-9 col-9 background">
+        <div
+          class="row"
+          style="height: 60vh; width: fit-content; display: block; margin: auto"
+        >
+          <img
+            src="./logo-removebg.png"
+            alt="Artwist- Guess the Art"
+            style="display: block; margin: auto; height: 100%"
+          />
+        </div>
+        <div class="row">
+          <div
+            class="buttons"
+            style="
+              display: flex;
+              flex-wrap: nowrap;
+              justify-content: center;
+              margin-bottom: 10px;
+              margin-top: -40px;
+            "
+          >
+            <form action="/create_room?user=<%= user %>" method="post">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                style="margin-left: 30px; margin-right: 15px"
+              >
+                Create Room
+              </button>
+            </form>
+            <!-- <div class="lobby" id="join">
+              <form action="/join" method="post">
+                <input
+                  type="text"
+                  name="room_code"
+                  placeholder="Enter Room Code"
+                  id="code"
+                />
+                <button type="submit" class="btn btn-primary">Join Room</button>
+              </form>
+            </div> -->
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="opened2()"
+              style="margin-left: 15px; margin-right: 30px"
+            >
+              Join Room
+            </button>
+          </div>
+          <div
+            style="display: flex; flex-wrap: nowrap; justify-content: center"
+          >
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="signin()"
+              style="width: auto"
+            >
+              Create an Account
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-3 col-s-12 background_leaderboard">
+        <p
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            font-weight: bold;
+            font-family: cursive;
+            border-radius: 10px;
+            height: 45px;
+            border: 2px solid black;
+            background-color: aqua;
+          "
+        >
+          Leaderboard
+        </p>
+        <!-- <ul id="leaderboard"> -->
+        <!-- We need to create a leaderboard which shows score and profile photo and user name.. that will be done in backend but styling and ids i will decide -->
+        <div class="list-group">
+          <ul id="leaderboard"></ul>
+        </div>
+      </div>
+    </div>
+    <div class="lobby" id="join">
+      <form action="/join?user=<%= user %>" method="post">
+        <input
+          type="text"
+          name="room_code"
+          placeholder="Enter Room Code"
+          id="code"
+        />
+        <button type="submit" class="btn btn-primary">Join</button>
+        <button type="button" class="btn btn-danger" onclick="close1()">
+          Close
+        </button>
+      </form>
+    </div>
+  </body>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.socket.io/4.5.3/socket.io.min.js"
+    integrity="sha384-WPFUvHkB1aHA5TDSZi6xtDgkF0wXJcIIxXhC6h8OT8EH3fC5PWro5pWJ1THjcfEi"
+    crossorigin="anonymous"
+  ></script>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-app.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+      https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-firestore.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyCvvpxdf0EEEz4hWng409wFpH9mAL5Sw-g",
+      authDomain: "artwister-c0c8e.firebaseapp.com",
+      projectId: "artwister-c0c8e",
+      storageBucket: "artwister-c0c8e.appspot.com",
+      messagingSenderId: "468334760517",
+      appId: "1:468334760517:web:248ac98c2a2198a4a2092c",
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+  </script>
+  <script src="main.js"></script>
+</html>

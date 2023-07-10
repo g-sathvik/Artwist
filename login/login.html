@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="../logo.jpg" type="image/x-icon" />
+  <link rel="stylesheet" href="./login.css" />
+  <title>Login | Artwist</title>
+</head>
+
+<body>
+  <header>
+    <h1>Artwist</h1>
+  </header>
+  <main>
+    <div class="form_class">
+      <div class="form_div">
+        <form id="login">
+          <label>Username:</label>
+          <input class="field_class" name="username_txt" type="text" id="username" required="required"
+            autofocus />
+          <label>Password:</label>
+          <input class="field_class" name="password_txt" type="password" id="password"  required="required"/>
+          <button class="submit_class" id="signIn" type="submit">
+            Sign In
+          </button>
+        </form>
+      </div>
+      <div class="info_div">
+        <p>
+          Not registered yet?
+        <form action="/signUp">
+          <button class="submit_class">Sign Up</button>
+        </form>
+        </p>
+      </div>
+    </div>
+  </main>
+  
+</body>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+   https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-firestore.js"></script>
+
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCvvpxdf0EEEz4hWng409wFpH9mAL5Sw-g",
+    authDomain: "artwister-c0c8e.firebaseapp.com",
+    projectId: "artwister-c0c8e",
+    storageBucket: "artwister-c0c8e.appspot.com",
+    messagingSenderId: "468334760517",
+    appId: "1:468334760517:web:248ac98c2a2198a4a2092c",
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+</script>
+<script src="./login.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</html>
